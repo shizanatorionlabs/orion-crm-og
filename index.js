@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAllClients, getAllProducts, getAllPurchaseProducts, getAllPurchases, getClient, getProduct, getPurchase, getPurchasedProduct } from './schema.js'
+import { createTable, getAllClients, getAllProducts, getAllPurchaseProducts, getAllPurchases, getClient, getProduct, getPurchase, getPurchasedProduct } from './schema.js'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -10,6 +10,11 @@ const apiKey = 'abcd1234$$'
 app.get('/', (req, res) => {
     res.status(200).send('home')
     console.log('home')
+
+
+    createTable()
+    .then(data => res.json(data))
+    .catch(err => console.error(err))
 })
 
 

@@ -5,11 +5,11 @@ const { Pool } = pg;
 
 
 const pool = new Pool({
-    user: 'admin',
-    host: 'dpg-cji6ce0cfp5c738nmssg-a',
-    database: 'orioncmsbs',
-    password: 'GqtvjFhbQ77MYuTsQgzX2WTjalyP8kHu',
-    port: 5432,
+    user: 'postgres',
+    host: 'localhost',
+    database: 'orioncrmdb',
+    password: 'OrionLabs666999$$',
+    port: 5432
 })
 
 
@@ -21,6 +21,39 @@ export const testConnection = () => {
         } else {
             console.log('Connected to PostgreSQL at:', res.rows[0].now)
         }
+    })
+}
+
+
+// Create Table If Not Exist
+export const createTable = () => {
+    const createTableQuery = `
+        CREATE TABLE clients (
+        client_id SERIAL PRIMARY KEY,
+        first_name VARCHAR(50) NOT NULL,
+        last_name VARCHAR(50) NOT NULL,
+        shop_name VARCHAR(100),
+        mobile_no VARCHAR(15) NOT NULL,
+        email_id VARCHAR(100),
+        gst_no VARCHAR(15),
+        address VARCHAR(200),
+        zip_code VARCHAR(10),
+        area VARCHAR(100)
+    );
+    `;
+
+    return new Promise((resolve, reject) => {
+        pool.query(createTableQuery, (err, result) => {
+            if (err) {
+                console.error('Error creating table:', err);
+                res.status(500).send('Error creating table');
+                reject(err)
+            } else {
+                console.log('Table "users" created or already exists');
+                res.send('Table "users" created or already exists');
+                resolve(result)
+            }
+        });
     })
 }
 

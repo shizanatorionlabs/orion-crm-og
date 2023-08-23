@@ -5,11 +5,11 @@ const { Pool } = pg;
 
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'orioncrmdb',
-    password: 'OrionLabs666999$$',
-    port: 5432
+    user: 'admin',
+    host: 'dpg-cji6ce0cfp5c738nmssg-a',
+    database: 'orioncmsbs',
+    password: 'GqtvjFhbQ77MYuTsQgzX2WTjalyP8kHu',
+    port: 5432,
 })
 
 
